@@ -1,0 +1,66 @@
+﻿@model ContosoUniversity.Models.Course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Credits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignments)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Course</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Percentage of Course</th>
+                </tr>
+                @foreach (var item in Model.Assignments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompletionInfo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem=>item.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Percentage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

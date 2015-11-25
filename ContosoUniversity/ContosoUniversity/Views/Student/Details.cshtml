@@ -1,0 +1,88 @@
+﻿@model ContosoUniversity.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <h5>Assignments</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstMidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+                <dt>
+            @Html.DisplayNameFor(model => model.Enrollments)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Course</th>
+                    <th>New</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Completion Information</th>
+                    <th>Due Date</th>
+                    <th>Percentage of Grade</th>
+                </tr>
+                @foreach (var item in Model.Enrollments)
+                {
+
+                          foreach (var assignment in item.Course.Assignments)
+                          {
+                              <tr>
+                                  <td>
+                                      @Html.DisplayFor(modeltItem => assignment.Course.Title)
+                                  </td>
+                                  <td>
+                                      @Html.ActionLink("New", "Create", "Assignment")
+                                  </td>
+                                  <td>
+                                      @Html.ActionLink("Edit", "Edit/" + assignment.ID, "Assignment")
+                                  </td>
+                                  <td>
+                                      @Html.ActionLink("Delete", "Delete/" + assignment.ID, "Assignment")
+                                  </td>
+                            <td>
+                                @Html.DisplayFor(modelItem=>assignment.CompletionInfo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem=>assignment.DueDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem=>assignment.Percentage)
+                            </td>
+                                  </tr>
+                          }
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
